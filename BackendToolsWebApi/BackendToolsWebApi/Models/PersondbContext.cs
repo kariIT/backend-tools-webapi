@@ -31,18 +31,12 @@ namespace BackendToolsWebApi.Models
         {
             modelBuilder.Entity<Person>(entity =>
             {
-                entity.Property(e => e.Name)
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
+                entity.Property(e => e.Name).IsUnicode(false);
             });
 
             modelBuilder.Entity<Phone>(entity =>
             {
-                entity.Property(e => e.Number).HasMaxLength(10);
-
-                entity.Property(e => e.Type)
-                    .HasMaxLength(10)
-                    .IsUnicode(false);
+                entity.Property(e => e.Type).IsUnicode(false);
 
                 entity.HasOne(d => d.Person)
                     .WithMany(p => p.Phone)
