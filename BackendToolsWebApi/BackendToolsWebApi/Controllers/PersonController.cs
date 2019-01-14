@@ -37,7 +37,6 @@ namespace BackendToolsWebApi.Controllers
             return new JsonResult(person);
         }
 
-        /*
         // POST: api/person
         [HttpPost]
         public ActionResult<Person> Create(Person person)
@@ -45,12 +44,20 @@ namespace BackendToolsWebApi.Controllers
             return _personRepository.Create(person);
         }
 
-        // PUT: api/person/{id}
+        // PUT: api/person/{id} // returns id: -94089234i93242????
         [HttpPut("{id}")]
         public ActionResult<Person> Update(int id, Person person)
         {
-            return _personRepository.Update(id, person);
+            Person updatePerson = _personRepository.Update(id, person);
+            return new JsonResult(updatePerson);
         }
-        */
+
+        // DELETE: api/person/{id}
+        [HttpDelete("{id}")]
+        public ActionResult<Person> Delete(int id)
+        {
+            _personRepository.Delete(id);
+            return new OkResult();
+        }
     }
 }

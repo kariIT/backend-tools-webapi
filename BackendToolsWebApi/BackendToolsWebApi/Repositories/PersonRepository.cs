@@ -15,9 +15,14 @@ namespace BackendToolsWebApi.Repositories
         {
             _context = context;
         }
+
+        // CREATE PERSON person;
         public Person Create(Person person)
         {
-            throw new NotImplementedException();
+            _context.Person.Add(person);
+            _context.SaveChanges();
+            Console.WriteLine("PERSON CREATED", person.Name, person.Age);
+            return person;
         }
 
         // SELECT * FROM PERSON;
@@ -33,14 +38,30 @@ namespace BackendToolsWebApi.Repositories
             return _context.Person.AsNoTracking().FirstOrDefault(p => p.Id == id);
         }
 
+        // UPDATE PERSON person;
         public Person Update(int id, Person person)
         {
-            throw new NotImplementedException();
+            var check = Read(id);
+
+            if (check == person)
+            {
+                throw new Exception("Person not found.");
+            }
+            else
+            {
+                _context.Person.Update(person);
+
+                Console.WriteLine("PERSON UPDATED: " + "ID: " + person.Id + " NAME: " + person.Name);
+            }
+            return person;
         }
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var person = Read(id);
+            _context.Person.Remove(person);
+            _context.SaveChanges();
+            Console.WriteLine("PERSON DELETED: " + person.Id + " " + person.Name);
         }
     }
 }
