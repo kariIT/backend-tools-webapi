@@ -12,8 +12,14 @@ namespace BackendToolsWebApi.Models
             Phone = new HashSet<Phone>();
         }
 
+        public Person(string name, short? age)
+        {
+            Name = name;
+            Age = age;
+        }
+
         public long Id { get; set; }
-        [StringLength(10)]
+        [StringLength(50)]
         public string Name { get; set; }
         public short? Age { get; set; }
 
