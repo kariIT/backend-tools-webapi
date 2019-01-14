@@ -34,7 +34,6 @@ namespace BackendToolsWebApi.Repositories
         // SELECT * FROM PERSON WHERE ID={id};
         public Person Read(int id)
         {
-            // == return true or false
             return _context.Person.AsNoTracking().FirstOrDefault(p => p.Id == id);
         }
 
@@ -47,12 +46,11 @@ namespace BackendToolsWebApi.Repositories
             {
                 throw new Exception("Person not found.");
             }
-            else
-            {
-                _context.Person.Update(person);
 
-                Console.WriteLine("PERSON UPDATED: " + "ID: " + person.Id + " NAME: " + person.Name);
-            }
+            _context.Person.Update(person);
+            _context.SaveChanges();
+
+            Console.WriteLine("PERSON UPDATED: " + "ID: " + person.Id + " NAME: " + person.Name);
             return person;
         }
 
