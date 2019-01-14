@@ -28,7 +28,7 @@ namespace BackendToolsWebApi.Repositories
         // SELECT * FROM PERSON;
         public List<Person> Read()
         {
-            return _context.Person.ToList();
+            return _context.Person.Include(p => p.Phone).ToList();
         }
 
         // SELECT * FROM PERSON WHERE ID={id};

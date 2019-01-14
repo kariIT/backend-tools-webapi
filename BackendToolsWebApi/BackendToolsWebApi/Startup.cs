@@ -29,6 +29,11 @@ namespace BackendToolsWebApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IPersonRepository, PersonRepository>();
+
+            // ignore json serialization
+            services.AddMvc().AddJsonOptions(x =>
+                x.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            
             services.AddDbContext<PersondbContext>(options =>
             {
                 options.UseSqlServer(Configuration["DbConnections:Local"]);
