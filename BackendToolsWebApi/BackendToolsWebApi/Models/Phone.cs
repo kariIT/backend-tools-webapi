@@ -7,6 +7,10 @@ namespace BackendToolsWebApi.Models
 {
     public partial class Phone
     {
+        public Phone()
+        {
+        }
+
         public Phone(long id, long? personId)
         {
             Id = id;

@@ -44,7 +44,7 @@ namespace BackendToolsWebApi.Controllers
             return _personRepository.Create(person);
         }
 
-        // PUT: api/person/{id} // returns id: -94089234i93242????
+        // PUT: api/person/{id}
         [HttpPut("{id}")]
         public ActionResult<Person> Update(int id, Person person)
         {

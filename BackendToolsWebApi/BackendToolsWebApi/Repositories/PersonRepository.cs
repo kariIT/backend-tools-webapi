@@ -16,12 +16,12 @@ namespace BackendToolsWebApi.Repositories
             _context = context;
         }
 
-        // CREATE PERSON person;
+        // CREATE TYPE PERSON;
         public Person Create(Person person)
         {
-            _context.Person.Add(person);
+            _context.Add(person);
             _context.SaveChanges();
-            Console.WriteLine("PERSON CREATED", person.Name, person.Age);
+            
             return person;
         }
 
@@ -29,15 +29,17 @@ namespace BackendToolsWebApi.Repositories
         public List<Person> Read()
         {
             return _context.Person.Include(p => p.Phone).ToList();
+            // return _context.Person.FromSql("SELECT PERSON.*, PHONE.*, " + 
+            //                                "FROM PERSON INNER JOIN PHONE ON PERSON.ID = PHONE.PERSONID");
         }
 
-        // SELECT * FROM PERSON WHERE ID={id};
+        // SELECT FROM PERSON WHERE ID={id};
         public Person Read(int id)
         {
             return _context.Person.AsNoTracking().FirstOrDefault(p => p.Id == id);
         }
 
-        // UPDATE PERSON person;
+        // UPDATE PERSON WHERE ID={id};
         public Person Update(int id, Person person)
         {
             var check = Read(id);
@@ -50,10 +52,10 @@ namespace BackendToolsWebApi.Repositories
             _context.Person.Update(person);
             _context.SaveChanges();
 
-            Console.WriteLine("PERSON UPDATED: " + "ID: " + person.Id + " NAME: " + person.Name);
             return person;
         }
 
+        // DELETE FROM PERSON WHERE ID={id};
         public void Delete(int id)
         {
             var person = Read(id);
