@@ -29,12 +29,12 @@ namespace BackendToolsWebApi.Controllers
             return new JsonResult(persons);
         }
         
-        // GET: api/person/{id}
-        [HttpGet("{id}")]
-        public ActionResult<Person> GetPersonById(int id)
+        // GET: api/person/{name}
+        [HttpGet("{name}")]
+        public ActionResult<List<Person>> GetPersonsByName(string name)
         {
-            Person person = _personRepository.Read(id);
-            return new JsonResult(person);
+            List<Person> persons = _personRepository.Read(name);
+            return new JsonResult(persons);
         }
 
         // POST: api/person

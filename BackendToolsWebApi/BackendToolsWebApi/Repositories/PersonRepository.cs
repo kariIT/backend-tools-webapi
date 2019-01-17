@@ -39,6 +39,18 @@ namespace BackendToolsWebApi.Repositories
             return _context.Person.AsNoTracking().FirstOrDefault(p => p.Id == id);
         }
 
+        // SELECT * FROM PERSON WHERE NAME={name};
+        public List<Person> Read(string name)
+        {
+            List<Person> persons = Read();
+
+            List<Person> found = persons.FindAll(p => p.Name == name).ToList();
+            Console.WriteLine(found);
+
+            return found;
+
+        }
+
         // UPDATE PERSON WHERE ID={id};
         public Person Update(int id, Person person)
         {
