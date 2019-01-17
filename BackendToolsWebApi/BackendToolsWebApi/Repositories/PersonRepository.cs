@@ -55,8 +55,7 @@ namespace BackendToolsWebApi.Repositories
         public Person Update(int id, Person person)
         {
             var check = Read(id);
-
-            if (check == person)
+            if (check == null)
             {
                 throw new Exception("Person not found.");
             }
