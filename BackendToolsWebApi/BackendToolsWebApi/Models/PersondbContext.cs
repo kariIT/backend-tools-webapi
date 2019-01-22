@@ -23,6 +23,8 @@ namespace BackendToolsWebApi.Models
             modelBuilder.Entity<Person>(entity =>
             {
                 entity.Property(e => e.Name).IsUnicode(false);
+
+                entity.Property(e => e.Psw).IsUnicode(false);
             });
 
             modelBuilder.Entity<Phone>(entity =>
