@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using BackendToolsWebApi.Models;
 
-namespace BackendToolsWebApi.Repositories
+namespace BackendToolsWebApi.Services
 {
-    public interface IPersonRepository
+    public interface IPersonService
     {
         Person Create(Person person);
         List<Person> Read();
@@ -14,5 +14,6 @@ namespace BackendToolsWebApi.Repositories
         List<Person> Read(string name);
         Person Update(int id, Person person);
         void Delete(int id);
+
     }
 }

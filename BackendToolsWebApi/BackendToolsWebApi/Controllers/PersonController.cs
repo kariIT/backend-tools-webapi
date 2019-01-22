@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using BackendToolsWebApi.Models;
+﻿using BackendToolsWebApi.Models;
 using BackendToolsWebApi.Repositories;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using BackendToolsWebApi.Services;
 
 namespace BackendToolsWebApi.Controllers
 {
@@ -14,18 +10,18 @@ namespace BackendToolsWebApi.Controllers
     [ApiController]
     public class PersonController : ControllerBase
     {
-        private readonly IPersonRepository _personRepository;
+        private readonly IPersonService _personService;
 
-        public PersonController(IPersonRepository personRepository)
+        public PersonController(IPersonService personService)
         {
-            _personRepository = personRepository;
+            _personService = personService;
         }
 
         // GET: api/person
         [HttpGet]
         public ActionResult<List<Person>> GetPersons()
         {
-            List<Person> persons = _personRepository.Read();
+            List<Person> persons = _personService.Read();
             return new JsonResult(persons);
         }
         
@@ -33,7 +29,7 @@ namespace BackendToolsWebApi.Controllers
         [HttpGet("{name}")]
         public ActionResult<List<Person>> GetPersonsByName(string name)
         {
-            List<Person> persons = _personRepository.Read(name);
+            List<Person> persons = _personService.Read(name);
             return new JsonResult(persons);
         }
 
@@ -41,14 +37,14 @@ namespace BackendToolsWebApi.Controllers
         [HttpPost]
         public ActionResult<Person> Create(Person person)
         {
-            return _personRepository.Create(person);
+            return _personService.Create(person);
         }
 
         // PUT: api/person/{id}
         [HttpPut("{id}")]
         public ActionResult<Person> Update(int id, Person person)
         {
-            Person updatePerson = _personRepository.Update(id, person);
+            Person updatePerson = _personService.Update(id, person);
             return new JsonResult(updatePerson);
         }
 
@@ -56,7 +52,7 @@ namespace BackendToolsWebApi.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Person> Delete(int id)
         {
-            _personRepository.Delete(id);
+            _personService.Delete(id);
             return new OkResult();
         }
     }
