@@ -12,7 +12,7 @@ namespace BackendToolsWebApi.Repositories
         List<Person> Read();
         Person Read(int id);
         List<Person> Read(string name);
-        Person Update(int id, Person person);
+        Person Update(Person person);
         void Delete(int id);
     }
 }

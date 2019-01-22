@@ -38,7 +38,13 @@ namespace BackendToolsWebApi.Services
 
         public Person Update(int id, Person person)
         {
-            return _personRepository.Update(id, person);
+            var check = Read(id);
+            if (check == null)
+            {
+                throw new Exception("Person not found.");
+            }
+
+            return _personRepository.Update(person);
         }
 
         public void Delete(int id)

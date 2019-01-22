@@ -52,14 +52,8 @@ namespace BackendToolsWebApi.Repositories
         }
 
         // UPDATE PERSON WHERE ID={id};
-        public Person Update(int id, Person person)
+        public Person Update(Person person)
         {
-            var check = Read(id);
-            if (check == null)
-            {
-                throw new Exception("Person not found.");
-            }
-
             _context.Person.Update(person);
             _context.SaveChanges();
 
