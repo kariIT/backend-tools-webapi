@@ -51,6 +51,12 @@ namespace BackendToolsWebApi.Services
                 throw new Exception("Person not found.");
             }
 
+            var psw = person.Psw;
+            var salt = person.Name;
+
+            var hashedPsw = PasswordHash.HashPassword(psw, salt);
+            person.Psw = hashedPsw;
+
             return _personRepository.Update(person);
         }
 
