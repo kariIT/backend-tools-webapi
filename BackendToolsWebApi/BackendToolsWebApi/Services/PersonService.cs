@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BackendToolsWebApi.Models;
 using BackendToolsWebApi.Repositories;
+using BackendToolsWebApi.Utilities;
 
 namespace BackendToolsWebApi.Services
 {
@@ -18,6 +19,12 @@ namespace BackendToolsWebApi.Services
 
         public Person Create(Person person)
         {
+            var psw = person.Psw;
+            var salt = person.Name;
+
+            var hashedPsw = PasswordHash.HashPassword(psw, salt);
+            person.Psw = hashedPsw;
+
             return _personRepository.Create(person);
         }
 

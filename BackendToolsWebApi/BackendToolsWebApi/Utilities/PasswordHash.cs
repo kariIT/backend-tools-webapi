@@ -9,7 +9,7 @@ namespace BackendToolsWebApi.Utilities
 {
     public class PasswordHash
     {
-        // hash password with salt and returns it as string
+        // hash password with salt and return it as string
         public static string HashPassword(string password, string salt)
         {
             byte[] saltBytes = Encoding.ASCII.GetBytes(salt);
